@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/hamzamahdi/Desktop/sub_vision/sub_vision/testGripClass.cpp">
+   </FileRef>
+   <FileRef
       location = "group:../sub_vision/blob.cpp">
    </FileRef>
    <FileRef

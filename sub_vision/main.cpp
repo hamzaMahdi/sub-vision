@@ -144,7 +144,7 @@ int main()
         }
          */
         cv::imshow("src", filtered);
-        cv::imshow("dst", gray);
+        cv::imshow("dst", dst);
         cv::imshow("bw", bw);
         waitKey(100);
         

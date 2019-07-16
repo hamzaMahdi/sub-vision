@@ -1,64 +1,87 @@
-//
-//  hough.cpp
-//  sub_vision
-//
-//  Created by Hamza Mahdi on 2019-07-16.
-//  Copyright © 2019 Hamza Mahdi. All rights reserved.
-//
-#include "opencv2/opencv.hpp"
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/opencv.hpp>
+#include <stdio.h>
+#include <iostream>
 
 using namespace cv;
 using namespace std;
 
-int main( int argc, char** argv )
+// variables to store images
+Mat dst, cimg, gray, img, edges;
+
+int initThresh;
+const int maxThresh = 1000;
+double th1,th2;
+
+// create a vector to store points of line
+vector<Vec4i> lines;
+
+void onTrackbarChange( int , void* )
 {
+    cimg = img.clone();
+    dst = img.clone();
     
-    // Read image
-    Mat im;
-    Mat filtered;
-    Mat mask;
-    VideoCapture cap("DSCF0678_Trim.mp4");
-    if(!cap.isOpened()){
-        cout << "Error opening video stream or file" << endl;
+    th1 = initThresh;
+    th2 = th1 * 0.4;
+    
+    Canny(img,edges,th1,th2);
+    
+    // apply hough line transform
+    HoughLinesP(edges, lines, 2, CV_PI/180, 50, 10, 100);
+    
+    // draw lines on the detected points
+    for( size_t i = 0; i < lines.size(); i++ )
+    {
+        Vec4i l = lines[i];
+        line( dst, Point(l[0], l[1]), Point(l[2], l[3]), Scalar(0,0,255), 1, LINE_AA);
+    }
+    
+    // show the resultant image
+    imshow("Result Image", dst);
+    imshow("Edges", edges);
+}
+
+int main(int argc, char** argv) {
+    //const char* file = argv[1];
+    // Read image (color mode)
+    
+    img = imread("rect.png");
+    dst = img.clone();
+    
+    if(img.empty())
+    {
+        //cout << "Error in reading image" << file<< endl;
         return -1;
     }
-    while(1){
-        cap>>im;
-        if(im.empty())
-            break;
-        Mat dst, cdst;
-        Canny(im, dst, 50, 200, 3);
-        cvtColor(dst, cdst, COLOR_GRAY2BGR);
-        
-#if 0
-        vector<Vec2f> lines;
-        HoughLines(dst, lines, 1, CV_PI/180, 10, 0, 0 );
-        
-        for( size_t i = 0; i < lines.size(); i++ )
-        {
-            float rho = lines[i][0], theta = lines[i][1];
-            Point pt1, pt2;
-            double a = cos(theta), b = sin(theta);
-            double x0 = a*rho, y0 = b*rho;
-            pt1.x = cvRound(x0 + 1000*(-b));
-            pt1.y = cvRound(y0 + 1000*(a));
-            pt2.x = cvRound(x0 - 1000*(-b));
-            pt2.y = cvRound(y0 - 1000*(a));
-            line( cdst, pt1, pt2, Scalar(0,0,255), 3, CV_AA);
-        }
-#else
-        vector<Vec4i> lines;
-        HoughLinesP(dst, lines, 1, CV_PI/180, 50, 50, 10 );
-        for( size_t i = 0; i < lines.size(); i++ )
-        {
-            Vec4i l = lines[i];
-            line( cdst, Point(l[0], l[1]), Point(l[2], l[3]), Scalar(0,0,255), 3 );
-        }
-#endif
-        imshow("source", im);
-        imshow("detected lines", cdst);
-        
-        waitKey(50);
+    
+    // Convert to gray-scale
+    cvtColor(img, gray, COLOR_BGR2GRAY);
+    
+    // Detect edges using Canny Edge Detector
+    // Canny(gray, dst, 50, 200, 3);
+    
+    // Make a copy of original image
+    // cimg = img.clone();
+    
+    // Will hold the results of the detection
+    namedWindow("Edges",1);
+    namedWindow("Result Image", 1);
+    
+    // Declare thresh to vary the max_radius of circles to be detected in hough transform
+    initThresh = 500;
+    
+    // Create trackbar to change threshold values
+    createTrackbar("threshold", "Result Image", &initThresh, maxThresh, onTrackbarChange);
+    onTrackbarChange(initThresh, 0);
+    
+    while(true)
+    {
+        int key;
+        key = waitKey( 1 );
+        if( (char)key == 27 )
+        { break; }
     }
     
+    destroyAllWindows();
 }

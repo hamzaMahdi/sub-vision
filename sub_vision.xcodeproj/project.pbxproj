@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9904D46922E22A1D009D5A0C /* FindArrows.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9904D46722E22A1D009D5A0C /* FindArrows.cpp */; };
+		9904D46B22E22A67009D5A0C /* arrows.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9904D46A22E22A67009D5A0C /* arrows.cpp */; };
+		994885C422E2B85800CB1401 /* create_mask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 994885C322E2B85800CB1401 /* create_mask.cpp */; };
 		99B8107C22DD440900FA3EDE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 99B8107B22DD440900FA3EDE /* main.cpp */; };
 		99B8108522DD870400FA3EDE /* hough.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 99B8108422DD870400FA3EDE /* hough.cpp */; };
 		99B8108722DE301300FA3EDE /* testGripClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 99B8108622DE301300FA3EDE /* testGripClass.cpp */; };
@@ -26,6 +29,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9904D46722E22A1D009D5A0C /* FindArrows.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FindArrows.cpp; sourceTree = "<group>"; };
+		9904D46822E22A1D009D5A0C /* FindArrows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindArrows.h; sourceTree = "<group>"; };
+		9904D46A22E22A67009D5A0C /* arrows.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = arrows.cpp; sourceTree = "<group>"; };
+		994885C322E2B85800CB1401 /* create_mask.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = create_mask.cpp; sourceTree = "<group>"; };
 		99B8107822DD440800FA3EDE /* sub_vision */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = sub_vision; sourceTree = BUILT_PRODUCTS_DIR; };
 		99B8107B22DD440900FA3EDE /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		99B8108422DD870400FA3EDE /* hough.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = hough.cpp; sourceTree = "<group>"; };
@@ -64,11 +71,15 @@
 		99B8107A22DD440800FA3EDE /* sub_vision */ = {
 			isa = PBXGroup;
 			children = (
+				9904D46722E22A1D009D5A0C /* FindArrows.cpp */,
+				9904D46822E22A1D009D5A0C /* FindArrows.h */,
 				99B8108822DE35EC00FA3EDE /* GripPipeline.cpp */,
 				99B8108922DE35EC00FA3EDE /* GripPipeline.h */,
 				99B8108622DE301300FA3EDE /* testGripClass.cpp */,
 				99B8107B22DD440900FA3EDE /* main.cpp */,
 				99B8108422DD870400FA3EDE /* hough.cpp */,
+				9904D46A22E22A67009D5A0C /* arrows.cpp */,
+				994885C322E2B85800CB1401 /* create_mask.cpp */,
 			);
 			path = sub_vision;
 			sourceTree = "<group>";
@@ -129,10 +140,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				994885C422E2B85800CB1401 /* create_mask.cpp in Sources */,
 				99B8107C22DD440900FA3EDE /* main.cpp in Sources */,
 				99B8108A22DE35EC00FA3EDE /* GripPipeline.cpp in Sources */,
 				99B8108522DD870400FA3EDE /* hough.cpp in Sources */,
+				9904D46922E22A1D009D5A0C /* FindArrows.cpp in Sources */,
 				99B8108722DE301300FA3EDE /* testGripClass.cpp in Sources */,
+				9904D46B22E22A67009D5A0C /* arrows.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
